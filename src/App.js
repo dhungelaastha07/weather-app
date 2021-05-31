@@ -27,13 +27,13 @@ class App extends Component {
   }
   render() {
     const daysArray = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "SUNDAY",
+      "MONDAY",
+      "TUESDAY",
+      "WEDNESDAY",
+      "THURSDAY",
+      "FRIDAY",
+      "SATURDAY",
     ];
     const dailyTemp =
       this.state.weatherData &&
@@ -41,20 +41,32 @@ class App extends Component {
         let date = new Date(item.dt * 1000);
         let day = date.getDay();
         return (
-          <div>
-            {daysArray[day]}: {item.temp.day}
+          <div className="day-temp">
+            <p> {daysArray[day]} </p>
+            <p className="temp"> {item.temp.day} ° </p>
           </div>
         );
       });
     return (
-      <div>
+      <div className="parent-container">
         {this.state.weatherData && (
-          <div>
-            <h1>{dailyTemp}</h1>
-            <h1>
-              {" "}
-              Current Temperature : {this.state.weatherData.daily[0].temp.day}
-            </h1>
+          <div className="container">
+            <div className="upper-container">
+              <div>
+                <p className="current-temp">
+                  {" "}
+                  {this.state.weatherData.daily[0].temp.day} °F
+                </p>
+                <h2>{new Date().toDateString()}</h2>
+              </div>
+
+              <img
+                src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather03-512.png"
+                alt=""
+              />
+            </div>
+
+            <div className="daily-temp">{dailyTemp}</div>
           </div>
         )}
       </div>
